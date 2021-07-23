@@ -5,6 +5,11 @@
     <title>Title</title>
 </head>
 <body>
+    <h1>Viewing all posts</h1>
 
+    <div th:each="post : ${posts}">
+        <h3 th:text="${post.getTitle()}"></h3>
+        <p th:text="${post.getBody()}"></p>
+    </div>
 </body>
 </html>
