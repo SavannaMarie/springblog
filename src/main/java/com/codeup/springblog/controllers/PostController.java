@@ -26,16 +26,12 @@ public class PostController {
         return "posts/show";
     }
 
-    // When you visit the URL you will see the form to create a post.
     @GetMapping("/posts/create")
     @ResponseBody
     public String createForm() {
         return "View form to create a post.";
     }
 
-    // When you submit the form on the /posts/create page,
-    // the information will be posted to the same URL
-//    @RequestMapping(path = "/posts/create", method = RequestMethod.POST)
     @PostMapping("/posts/create")
     @ResponseBody
     public String createPost() {
