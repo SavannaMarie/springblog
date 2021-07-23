@@ -2,14 +2,18 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Title</title>
+    <title>Posts</title>
+    <th:block th:replace="partials/partials.html :: styles"></th:block>
 </head>
 <body>
-    <h1>Viewing all posts</h1>
-
-    <div th:each="post : ${posts}">
-        <h3 th:text="${post.getTitle()}"></h3>
-        <p th:text="${post.getBody()}"></p>
+    <nav th:replace="partials/partials.html :: navbar"></nav>
+    <div class="container">
+        <h1>Viewing all posts</h1>
+        <div th:each="post : ${posts}">
+            <h3 th:text="${post.getTitle()}"></h3>
+            <p th:text="${post.getBody()}"></p>
+        </div>
     </div>
+    <th:block th:replace="partials/partials.html :: scripts"></th:block>
 </body>
 </html>

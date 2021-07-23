@@ -2,10 +2,15 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Title</title>
+    <title>Selected post</title>
+    <th:block th:replace="partials/partials.html :: styles"></th:block>
 </head>
 <body>
-    <h1 th:text="${post.getTitle()}"></h1>
-    <p th:text="${post.getBody()}"></p>
+    <nav th:replace="partials/partials.html :: navbar"></nav>
+    <div class="container">
+        <h1 th:text="${post.getTitle()}"></h1>
+        <p th:text="${post.getBody()}"></p>
+    </div>
+    <th:block th:replace="partials/partials.html :: scripts"></th:block>
 </body>
 </html>
