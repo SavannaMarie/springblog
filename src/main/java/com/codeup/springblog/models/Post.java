@@ -8,30 +8,18 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 140)
     private String title;
 
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @Column(nullable = false, length = 700)
     private String body;
 
     public Post() {}
 
-    // CREATE
     public Post(String title, String body) {
         this.title = title;
         this.body = body;
     }
-
-    //READ
-    public Post(Long id, String title, String body) {
-        this.id = id;
-        this.title = title;
-        this.body = body;
-    }
-
-    public Long getId() { return id; }
-
-    public void setId(Long id) { this.id = id; }
 
     public String getTitle() {
         return title;
@@ -49,4 +37,11 @@ public class Post {
         this.body = body;
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 }

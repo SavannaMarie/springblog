@@ -5,8 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 public class PostController {
@@ -18,17 +16,13 @@ public class PostController {
 
     @GetMapping("/posts")
     public String viewPosts(Model model) {
-        List<Post> posts = new ArrayList<>();
-        posts.add(new Post("This is post1", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."));
-        posts.add(new Post("This is post2", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."));
-        model.addAttribute("posts", posts);
+        model.addAttribute("posts", postDao.findAll());
         return "posts/index";
     }
 
     @GetMapping("/posts/{id}")
     public String singlePost(@PathVariable long id, Model model) {
-        Post post = new Post("Jeff buys bicycle.", "No one know why. Must really like the feeling of the wind on his face.");
-        model.addAttribute("post", post);
+        model.addAttribute("post", postDao.getById(id));
         return "posts/show";
     }
 
@@ -43,4 +37,25 @@ public class PostController {
     public String createPost() {
         return "Creates new post.";
     }
+    @PostMapping("/posts/delete/{id}")
+    public String deletePost(@PathVariable long id, Model model){
+        postDao.deleteById(id);
+        return "redirect:/posts";
+    }
+
+    @GetMapping("/posts/edit/{id}")
+    public String editForm(@PathVariable long id, Model model) {
+        model.addAttribute("post", postDao.getById(id));
+        return "posts/edit";
+    }
+
+    @PostMapping("/posts/edit/{id}")
+    public String editPost(@PathVariable long id, @RequestParam String title, @RequestParam String body) {
+        Post post = postDao.getById(id);
+        post.setTitle(title);
+        post.setBody(body);
+        postDao.save(post);
+        return "redirect:/posts/" + id;
+    }
+
 }

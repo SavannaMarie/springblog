@@ -10,6 +10,13 @@
     <div class="container">
         <h1 th:text="${post.getTitle()}"></h1>
         <p th:text="${post.getBody()}"></p>
+        <br>
+        <form th:action="@{/posts/delete/{id}(id = ${post.id})}" th:method="post">
+            <button type="submit" class="btn btn-dark">Delete</button>
+        </form>
+        <form th:action="@{/posts/edit/{id}(id = ${post.id})}" th:method="post">
+            <button type="submit" class="btn btn-dark">Edit</button>
+        </form>
     </div>
     <th:block th:replace="partials/partials.html :: scripts"></th:block>
 </body>
