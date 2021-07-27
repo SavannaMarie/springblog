@@ -10,8 +10,12 @@
     <div class="container">
         <h1>Viewing all posts</h1>
         <div th:each="post : ${posts}">
-            <h3 th:text="${post.getTitle()}"></h3>
-            <p th:text="${post.getBody()}"></p>
+            <a th:href="@{/posts/{post} (post=${post.id})}">
+                <h3 class="card-header" th:text="${post.title}"></h3></a>
+            <div class="card-body">
+                <p th:text="${post.body}"></p>
+                <p>Posted by: <span th:text="${post.user.email}"></span></p>
+            </div>
         </div>
     </div>
     <th:block th:replace="partials/partials.html :: scripts"></th:block>

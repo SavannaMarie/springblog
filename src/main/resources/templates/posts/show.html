@@ -8,15 +8,14 @@
 <body>
     <nav th:replace="partials/partials.html :: navbar"></nav>
     <div class="container">
-        <h1 th:text="${post.getTitle()}"></h1>
-        <p th:text="${post.getBody()}"></p>
+        <h1 th:text="${post.title}"></h1>
+        <p th:text="${post.body}"></p>
+        <p>Posted by: <span th:text="${post.user.email}"></span></p>
         <br>
         <form th:action="@{/posts/delete/{id}(id = ${post.id})}" th:method="post">
             <button type="submit" class="btn btn-dark">Delete</button>
         </form>
-        <form th:action="@{/posts/edit/{id}(id = ${post.id})}" th:method="post">
-            <button type="submit" class="btn btn-dark">Edit</button>
-        </form>
+        <a th:href="@{/posts/{id}/edit/(id = ${post.id})}" class="">Edit Post</a>
     </div>
     <th:block th:replace="partials/partials.html :: scripts"></th:block>
 </body>

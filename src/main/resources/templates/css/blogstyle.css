@@ -1,6 +1,7 @@
-/*body {*/
-/*    color: blue;*/
-/*}*/
-/*.navbar {*/
-/*    color: hotpink;*/
-/*}*/
+body{
+    color: hotpink;
+}
+
+.card{
+    margin: 10px;
+}
